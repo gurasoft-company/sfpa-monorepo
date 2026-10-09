@@ -1,0 +1,21 @@
+{
+  "name": "sfpa-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "db:migrate": "pnpm --filter @sfpa/api db:migrate",
+    "db:seed": "pnpm --filter @sfpa/api db:seed",
+    "db:reset": "pnpm --filter @sfpa/api db:reset"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

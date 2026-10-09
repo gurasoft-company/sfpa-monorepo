@@ -1,0 +1,6 @@
+node_modules/
+migrations/
+seeders/
+scripts/
+*.test.js
+*.spec.js

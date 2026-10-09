@@ -1,0 +1,20 @@
+{
+  "watch": ["src"],
+  "ext": "js,json",
+  "ignore": [
+    "src/**/*.test.js",
+    "src/**/*.spec.js",
+    "node_modules",
+    "logs",
+    "uploads",
+    "migrations",
+    "seeders",
+    ".git",
+    "*.log"
+  ],
+  "delay": 500,
+  "restartable": "rs",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
