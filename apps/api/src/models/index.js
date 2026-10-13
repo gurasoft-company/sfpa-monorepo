@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const pg = require('pg');  // ← AJOUT pour Vercel serverless
 const config = require('../config/database');
 
 const env = process.env.NODE_ENV || 'development';
@@ -19,6 +20,7 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     port: dbConfig.port,
     dialect: dbConfig.dialect,
+    dialectModule: pg,  // ← AJOUT : force Vercel à inclure pg dans le bundle
     logging: dbConfig.logging,
     define: dbConfig.define,
     pool: dbConfig.pool,
@@ -44,15 +46,15 @@ const db = {
 };
 
 // =========================================================
-// CHARGEMENT DES MODÈLES (à décommenter au fur et à mesure)
+// CHARGEMENT DES MODÈLES
 // =========================================================
 db.User = require('./User')(sequelize, DataTypes);
- db.Media = require('./Media')(sequelize, DataTypes);
+db.Media = require('./Media')(sequelize, DataTypes);
 db.Project = require('./Project')(sequelize, DataTypes);
- db.Formation = require('./Formation')(sequelize, DataTypes);
- db.Post = require('./Post')(sequelize, DataTypes);
+db.Formation = require('./Formation')(sequelize, DataTypes);
+db.Post = require('./Post')(sequelize, DataTypes);
 db.Member = require('./Member')(sequelize, DataTypes);
- db.Partner = require('./Partner')(sequelize, DataTypes);
+db.Partner = require('./Partner')(sequelize, DataTypes);
 db.Volunteer = require('./Volunteer')(sequelize, DataTypes);
 db.Contact = require('./Contact')(sequelize, DataTypes);
 db.Page = require('./Page')(sequelize, DataTypes);
@@ -60,9 +62,9 @@ db.Testimonial = require('./Testimonial')(sequelize, DataTypes);
 db.Donation = require('./Donation')(sequelize, DataTypes);
 
 // =========================================================
-// ASSOCIATIONS (à décommenter au fur et à mesure)
+// ASSOCIATIONS
 // =========================================================
- Object.keys(db).forEach((modelName) => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName] && typeof db[modelName].associate === 'function') {
     db[modelName].associate(db);
   }
